@@ -6,6 +6,7 @@
 //
 
 #import "PSTPanelSheetController.h"
+#import "PSTPanelNavigationView.h"
 
 const CGFloat defaultOverlayAlpha = 0.6;
 
@@ -18,6 +19,10 @@ const CGFloat defaultOverlayAlpha = 0.6;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *panelContentHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *panelContainerBottomConstraint;
 @property (weak, nonatomic) IBOutlet UIView *freeSpaceView;
+@property (strong, nonatomic) id panelContentViewOrViewController;
+@property (strong, nonatomic) UIView *panelNavigationContentView;
+@property (assign, nonatomic) CGFloat panelNavigationCustomHeight;
+@property (assign, nonatomic) CGFloat panelContentCustomHeight;
 
 @end
 
@@ -25,12 +30,13 @@ const CGFloat defaultOverlayAlpha = 0.6;
 
 - (instancetype)init
 {
-//    NSBundle *bundle = [NSBundle bundleForClass:[PSTPanelSheetController class]];
-//    self = [super initWithNibName:@"PSTPanelSheetController" bundle:bundle];
-    self = [super init];
+    NSBundle *bundle = [NSBundle bundleForClass:[PSTPanelSheetController class]];
+    self = [super initWithNibName:@"PSTPanelSheetController" bundle:bundle];
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverFullScreen;
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        self.panelNavigationCustomHeight = -1;
+        self.panelContentCustomHeight = -1;
     }
     return self;
 }
@@ -42,9 +48,38 @@ const CGFloat defaultOverlayAlpha = 0.6;
     [self addTapToDismissGesture:self.freeSpaceView];
     [self setupContentContainer];
     [self setupPanGesture];
+    [self setupPanelContent];
+    [self setupPanelNavigation];
 }
 
 #pragma mark - setup views
+
+- (void)setupPanelContent
+{
+    if (self.panelContentViewOrViewController) {
+        [self setPanelContentWithViewOrViewController:self.panelContentViewOrViewController];
+    }
+    if (self.panelContentCustomHeight > 0) {
+        [self setPanelContentHeight:self.panelContentCustomHeight];
+    }
+}
+
+- (void)setupPanelNavigation
+{
+    UIView *navigationView;
+    if (self.panelNavigationContentView) {
+        navigationView = self.panelContentView;
+    } else {
+        navigationView = [[PSTPanelNavigationView alloc] initWithTopCornerRadius:6
+                                                                       holeWidth:50
+                                                                      holeHeight:5
+                                                                   holeTopMargin:10];
+    }
+    [self setNavigationView:navigationView];
+    if (self.panelNavigationCustomHeight > 0) {
+        [self setPanelNavigationHeight:self.panelNavigationCustomHeight];
+    }
+}
 
 - (void)setupContentContainer
 {
@@ -65,10 +100,10 @@ const CGFloat defaultOverlayAlpha = 0.6;
     [superView addSubview:subview];
     subview.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray *constraints = @[
-                             [subview.topAnchor constraintEqualToAnchor:subview.topAnchor],
-                             [subview.rightAnchor constraintEqualToAnchor:subview.rightAnchor],
-                             [subview.leftAnchor constraintEqualToAnchor:subview.leftAnchor],
-                             [subview.bottomAnchor constraintEqualToAnchor:subview.bottomAnchor],
+                             [subview.topAnchor constraintEqualToAnchor:superView.topAnchor],
+                             [subview.rightAnchor constraintEqualToAnchor:superView.rightAnchor],
+                             [subview.leftAnchor constraintEqualToAnchor:superView.leftAnchor],
+                             [subview.bottomAnchor constraintEqualToAnchor:superView.bottomAnchor],
                              ];
     [NSLayoutConstraint activateConstraints:constraints];
 }
@@ -107,18 +142,55 @@ const CGFloat defaultOverlayAlpha = 0.6;
 
 #pragma mark - public functions for modifying views
 
-- (void)setContentController:(UIViewController *)viewController
+- (void)setPanelContentWithViewOrViewController:(id)viewOrViewController
 {
-    [self addChildViewController:viewController];
-    [self removeAllSubviews:self.panelContentView];
-    [self addSubview:viewController.view to:self.panelContentView];
-    [viewController didMoveToParentViewController:self];
+    self.panelContentViewOrViewController = viewOrViewController;
+    if ([self isViewLoaded]) {
+        if ([viewOrViewController isKindOfClass:[UIView class]]) {
+            UIView *view = (UIView *)viewOrViewController;
+            [self removeAllSubviews:self.panelContentView];
+            [self addSubview:view to:self.panelContentView];
+            self.panelContentView.backgroundColor = view.backgroundColor;
+        } else if ([viewOrViewController isKindOfClass:[UIViewController class]]) {
+            UIViewController *viewController = (UIViewController *)viewOrViewController;
+            [self addChildViewController:viewController];
+            [self removeAllSubviews:self.panelContentView];
+            [self addSubview:viewController.view to:self.panelContentView];
+            [viewController didMoveToParentViewController:self];
+            self.panelContentView.backgroundColor = viewController.view.backgroundColor;
+        }
+    }
 }
 
 - (void)setNavigationView:(UIView *)view
 {
-    [self removeAllSubviews:self.panelNavigationView];
-    [self addSubview:view to:self.panelNavigationView];
+    self.panelNavigationContentView = view;
+    if (self.isViewLoaded) {
+        [self removeAllSubviews:self.panelNavigationView];
+        [self addSubview:self.panelNavigationContentView to:self.panelNavigationView];
+    }
+}
+
+
+- (void)setPanelContentHeight:(CGFloat)height
+{
+    self.panelContentCustomHeight = height;
+    if (self.isViewLoaded) {
+        self.panelContentHeightConstraint.constant = height;
+    }
+}
+
+- (void)setPanelNavigationHeight:(CGFloat)height
+{
+    self.panelNavigationCustomHeight = height;
+    if (self.isViewLoaded) {
+        self.panelNavigationHeightConstraint.constant = height;
+    }
+}
+
+- (void)setOverlayBackgroundColor:(UIColor *)color
+{
+    self.view.backgroundColor = color;
 }
 
 #pragma mark - gesture and animation

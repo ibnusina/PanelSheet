@@ -22,8 +22,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		646394C922D5E4090093A3AC /* PSTPanelSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 646394C722D5E4090093A3AC /* PSTPanelSheetController.m */; };
-		646394CA22D5E4960093A3AC /* PSTPanelSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 646394C622D5E4090093A3AC /* PSTPanelSheetController.xib */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -60,9 +58,6 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		627415050ACB7C5BF5E91432 /* Pods_PanelSheet_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PanelSheet_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		646394C622D5E4090093A3AC /* PSTPanelSheetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSTPanelSheetController.xib; sourceTree = "<group>"; };
-		646394C722D5E4090093A3AC /* PSTPanelSheetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTPanelSheetController.m; sourceTree = "<group>"; };
-		646394C822D5E4090093A3AC /* PSTPanelSheetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTPanelSheetController.h; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7CC18937134F6CDE13ED4E0D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -143,9 +138,6 @@
 				6003F5A5195388D20070C39A /* PSTViewController.h */,
 				6003F5A6195388D20070C39A /* PSTViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
-				646394C822D5E4090093A3AC /* PSTPanelSheetController.h */,
-				646394C722D5E4090093A3AC /* PSTPanelSheetController.m */,
-				646394C622D5E4090093A3AC /* PSTPanelSheetController.xib */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -287,7 +279,6 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
-				646394CA22D5E4960093A3AC /* PSTPanelSheetController.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -377,7 +368,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				646394C922D5E4090093A3AC /* PSTPanelSheetController.m in Sources */,
 				6003F59E195388D20070C39A /* PSTAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* PSTViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

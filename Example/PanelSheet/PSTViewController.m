@@ -7,7 +7,7 @@
 //
 
 #import "PSTViewController.h"
-#import "PSTPanelSheetController.h"
+#import <PanelSheet/PanelSheet.h>
 
 @interface PSTViewController ()
 
@@ -18,16 +18,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupButton];
+    [self setupTopButton];
+    [self setupBottomButton];
 }
 
-- (void)setupButton
+- (void)setupTopButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame = CGRectMake(20, 20, 100, 40);
+    button.frame = CGRectMake(20, 20, 300, 40);
     [self.view addSubview:button];
-    [button setTitle:@"Show panel" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(showPanel) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Show panel With UIViewController content" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(showPanelWithUIViewControllerContent) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setupBottomButton
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    button.frame = CGRectMake(20, 80, 300, 40);
+    [self.view addSubview:button];
+    [button setTitle:@"Show panel With UIView content" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(showPanelWithIUIViewContent) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,10 +45,26 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)showPanel
+- (void)showPanelWithUIViewControllerContent
 {
-    PSTPanelSheetController *controller = [[PSTPanelSheetController alloc] init];
-    [self presentViewController:controller animated:YES completion:nil];
+    PSTPanelSheetController *panelController = [[PSTPanelSheetController alloc] init];
+    [panelController setPanelNavigationHeight:30];
+    [panelController setPanelContentHeight:200];
+    UIViewController *viewController = [[UIViewController alloc] init];
+    viewController.view.backgroundColor = UIColor.redColor;
+    [panelController setPanelContentWithViewOrViewController:viewController];
+    [self presentViewController:panelController animated:NO completion:nil];
+}
+
+- (void)showPanelWithIUIViewContent
+{
+    PSTPanelSheetController *panelController = [[PSTPanelSheetController alloc] init];
+    [panelController setPanelNavigationHeight:50];
+    [panelController setPanelContentHeight:100];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+    view.backgroundColor = UIColor.blueColor;
+    [panelController setPanelContentWithViewOrViewController:view];
+    [self presentViewController:panelController animated:NO completion:nil];
 }
 
 @end

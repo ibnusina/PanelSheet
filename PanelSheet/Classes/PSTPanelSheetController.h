@@ -10,12 +10,12 @@
 
 @interface PSTPanelSheetController : UIViewController
 
-- (void)setContentController:(UIViewController *)viewController;
+- (void)setPanelContentWithViewOrViewController:(id)viewOrViewController;
 - (void)setNavigationView:(UIView *)view;
 
+- (void)setPanelContentHeight:(CGFloat)height;
+- (void)setPanelNavigationHeight:(CGFloat)height;
 
 - (void)setOverlayBackgroundColor:(UIColor *)color;
-- (void)setContentBackgroundColor:(UIColor *)color;
-- (void)setNavigationBackgroundColor:(UIColor *)color;
 
 @end
