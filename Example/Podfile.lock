@@ -1,0 +1,16 @@
+PODS:
+  - PanelSheet (0.1.1)
+
+DEPENDENCIES:
+  - PanelSheet (from `../`)
+
+EXTERNAL SOURCES:
+  PanelSheet:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PanelSheet: e55a7025ed87d62d7c35765ac3a743ab774194e9
+
+PODFILE CHECKSUM: 21f28d7a5a2b65f38278195af2ee73352da5367a
+
+COCOAPODS: 1.6.1

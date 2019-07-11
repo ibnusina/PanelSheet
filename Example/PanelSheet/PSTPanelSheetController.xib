@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PSTPanelSheetController">
+            <connections>
+                <outlet property="freeSpaceView" destination="Fng-ng-6dk" id="NJ0-ZX-Sbj"/>
+                <outlet property="panelContainerBottomConstraint" destination="YYV-94-xXM" id="SZv-Hv-3JB"/>
+                <outlet property="panelContainerView" destination="hRq-ZJ-vTJ" id="obZ-SP-CPm"/>
+                <outlet property="panelContentBottomContraint" destination="aya-2R-5km" id="siy-X5-8pj"/>
+                <outlet property="panelContentHeightConstraint" destination="srI-qx-KwJ" id="dnh-zx-ljF"/>
+                <outlet property="panelContentView" destination="Esy-LU-WPG" id="mXj-eL-yhq"/>
+                <outlet property="panelNavigationHeightConstraint" destination="i3L-vu-y49" id="Jad-L6-aOQ"/>
+                <outlet property="panelNavigationView" destination="Xwy-gx-kqd" id="IUA-Tp-fNn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRq-ZJ-vTJ">
+                    <rect key="frame" x="0.0" y="568" width="375" height="244"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwy-gx-kqd">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="i3L-vu-y49"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Esy-LU-WPG">
+                            <rect key="frame" x="0.0" y="44" width="375" height="200"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="srI-qx-KwJ"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Esy-LU-WPG" firstAttribute="top" secondItem="Xwy-gx-kqd" secondAttribute="bottom" id="Gj0-OO-ou9"/>
+                        <constraint firstAttribute="trailing" secondItem="Esy-LU-WPG" secondAttribute="trailing" id="J1p-tA-DhO"/>
+                        <constraint firstAttribute="trailing" secondItem="Xwy-gx-kqd" secondAttribute="trailing" id="NRx-kO-Uhx"/>
+                        <constraint firstItem="Xwy-gx-kqd" firstAttribute="top" secondItem="hRq-ZJ-vTJ" secondAttribute="top" id="YHM-xw-9j7"/>
+                        <constraint firstAttribute="bottom" secondItem="Esy-LU-WPG" secondAttribute="bottom" id="aya-2R-5km"/>
+                        <constraint firstItem="Xwy-gx-kqd" firstAttribute="leading" secondItem="hRq-ZJ-vTJ" secondAttribute="leading" id="h97-Vs-dum"/>
+                        <constraint firstItem="Esy-LU-WPG" firstAttribute="leading" secondItem="hRq-ZJ-vTJ" secondAttribute="leading" id="qm3-X1-Rai"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fng-ng-6dk">
+                    <rect key="frame" x="0.0" y="44" width="375" height="524"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="5SA-l8-Fd2" firstAttribute="trailing" secondItem="Fng-ng-6dk" secondAttribute="trailing" id="5zq-Kb-llj"/>
+                <constraint firstItem="hRq-ZJ-vTJ" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="G5a-9Y-GqX"/>
+                <constraint firstItem="hRq-ZJ-vTJ" firstAttribute="top" secondItem="Fng-ng-6dk" secondAttribute="bottom" id="Njy-r9-QOH"/>
+                <constraint firstAttribute="bottom" secondItem="hRq-ZJ-vTJ" secondAttribute="bottom" id="YYV-94-xXM"/>
+                <constraint firstItem="Fng-ng-6dk" firstAttribute="top" secondItem="5SA-l8-Fd2" secondAttribute="top" id="dND-fY-9eW"/>
+                <constraint firstItem="Fng-ng-6dk" firstAttribute="leading" secondItem="5SA-l8-Fd2" secondAttribute="leading" id="iFa-fX-xtQ"/>
+                <constraint firstItem="hRq-ZJ-vTJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kHi-s5-IQh"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="5SA-l8-Fd2"/>
+            <point key="canvasLocation" x="136.80000000000001" y="110.09852216748769"/>
+        </view>
+    </objects>
+</document>
