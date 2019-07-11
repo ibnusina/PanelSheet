@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PanelSheet'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Drawer or Panel like action sheet.'
   s.description      = 'Drawer or Panel like action sheet. Written using Objective-C'
 
@@ -20,10 +20,10 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'PanelSheet/Classes/*'
+  s.source_files = 'PanelSheet/Classes/*.{m,h}'
   
   s.resource_bundles = {
-    'PanelSheet' => ['PanelSheet/Classes/*.xib']
+      'PSTPanelSheet' => ['PanelSheet/Classes/*.{xib}']
   }
 
   s.public_header_files = 'PanelSheet/Classes/*.h'
