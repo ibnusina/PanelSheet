@@ -8,21 +8,11 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PanelSheet'
-  s.version          = '0.1.2'
-  s.summary          = 'A short description of PanelSheet.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.version          = '1.0.0'
+  s.summary          = 'Drawer or Panel like action sheet.'
+  s.description      = 'Drawer or Panel like action sheet. Written using Objective-C'
 
   s.homepage         = 'https://github.com/ibnusina/PanelSheet'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ibnusina' => 'ibnu.sina009@gmail.com' }
   s.source           = { :git => 'https://github.com/ibnusina/PanelSheet.git', :tag => s.version.to_s }
