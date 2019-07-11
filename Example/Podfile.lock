@@ -1,5 +1,5 @@
 PODS:
-  - PanelSheet (0.1.2)
+  - PanelSheet (1.0.4)
 
 DEPENDENCIES:
   - PanelSheet (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PanelSheet: f2029f999019e6c579b9ef30f17dce51a84e47b9
+  PanelSheet: b52d381dc6b7694ba938a7cebde0b9236c578236
 
 PODFILE CHECKSUM: 21f28d7a5a2b65f38278195af2ee73352da5367a
 
