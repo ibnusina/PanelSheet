@@ -43,8 +43,7 @@ const CGFloat defaultOverlayAlpha = 0.6;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [self defaultOverlayBackgroudColor:defaultOverlayAlpha];
-    self.view.alpha = 0;
+    self.view.backgroundColor = [self defaultOverlayBackgroudColor:0];
     [self addTapToDismissGesture:self.freeSpaceView];
     [self setupContentContainer];
     [self setupPanGesture];
@@ -237,7 +236,7 @@ const CGFloat defaultOverlayAlpha = 0.6;
 - (void)setPanelBottomContraint:(CGFloat)bottomConstraint
                           alpha:(CGFloat)alpha
 {
-    self.view.alpha = alpha;
+    self.view.backgroundColor = [self defaultOverlayBackgroudColor:defaultOverlayAlpha * alpha];
     self.panelContainerBottomConstraint.constant = bottomConstraint;
 }
 
@@ -255,8 +254,7 @@ const CGFloat defaultOverlayAlpha = 0.6;
             if (movingDistance > 0) {
                 CGFloat newTransparancy = ([self getPanelContainerHeight] - movingDistance)/[self getPanelContainerHeight];
                 NSLog(@"%f", newTransparancy);
-                self.view.alpha = newTransparancy;
-                self.panelContainerBottomConstraint.constant = -movingDistance;
+                [self setPanelBottomContraint:-movingDistance alpha:newTransparancy];
             }
             break;
         }

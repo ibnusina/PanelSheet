@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PanelSheet'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'Drawer or Panel like action sheet.'
   s.description      = 'Drawer or Panel like action sheet. Written using Objective-C'
 
