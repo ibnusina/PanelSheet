@@ -1,5 +1,5 @@
 PODS:
-  - PanelSheet (1.0.3)
+  - PanelSheet (1.0.4)
 
 DEPENDENCIES:
   - PanelSheet (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PanelSheet: cab5541ad87acc05b7a36f08f10b0cb907fc6fba
+  PanelSheet: ef8abe65acd9f7e5e4772bb3ded0f19f740baebf
 
 PODFILE CHECKSUM: 21f28d7a5a2b65f38278195af2ee73352da5367a
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.3
