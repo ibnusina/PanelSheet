@@ -306,7 +306,7 @@ const CGFloat defaultOverlayAlpha = 0.6;
 }
 
 - (void)setKeyboardDisappear {
-    self.isKeyboardShown = YES;
+    self.isKeyboardShown = NO;
 }
 
 - (void)dismissKeyboard {
