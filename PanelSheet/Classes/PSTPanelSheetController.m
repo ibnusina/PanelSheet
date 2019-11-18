@@ -23,6 +23,7 @@ const CGFloat defaultOverlayAlpha = 0.6;
 @property (strong, nonatomic) UIView *panelNavigationContentView;
 @property (assign, nonatomic) CGFloat panelNavigationCustomHeight;
 @property (assign, nonatomic) CGFloat panelContentCustomHeight;
+@property (assign, nonatomic) BOOL isKeyboardShown;
 
 @end
 
@@ -45,10 +46,12 @@ const CGFloat defaultOverlayAlpha = 0.6;
     [super viewDidLoad];
     self.view.backgroundColor = [self defaultOverlayBackgroudColor:0];
     [self addTapToDismissGesture:self.freeSpaceView];
+    [self addTapToDismissKeyboardGesture:self.panelContainerView];
     [self setupContentContainer];
     [self setupPanGesture];
     [self setupPanelContent];
     [self setupPanelNavigation];
+    [self setupKeyboardObserver];
 }
 
 #pragma mark - setup views
@@ -196,7 +199,14 @@ const CGFloat defaultOverlayAlpha = 0.6;
 
 - (void)addTapToDismissGesture:(UIView *)view
 {
-    UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidePanelToBottomAndDismiss)];
+    UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardOrDismissPanel)];
+    view.userInteractionEnabled = YES;
+    [view addGestureRecognizer:tapGesture];
+}
+
+- (void)addTapToDismissKeyboardGesture:(UIView *)view
+{
+    UIGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     view.userInteractionEnabled = YES;
     [view addGestureRecognizer:tapGesture];
 }
@@ -207,8 +217,17 @@ const CGFloat defaultOverlayAlpha = 0.6;
     [self animatePanelWithBottomConstraint:0 alpha:1 completion:nil];
 }
 
+- (void)dismissKeyboardOrDismissPanel {
+    if (self.isKeyboardShown) {
+        [self dismissKeyboard];
+    } else {
+        [self hidePanelToBottomAndDismiss];
+    }
+}
+
 - (void)hidePanelToBottomAndDismiss
 {
+    [self removeKeyboardObserver];
     __weak PSTPanelSheetController *weakSelf = self;
     [self animatePanelWithBottomConstraint:[self getPanelContainerMinimumBottomConstraint] alpha:0 completion:^(BOOL finished) {
         [weakSelf dismissViewControllerAnimated:NO completion:nil];
@@ -272,5 +291,78 @@ const CGFloat defaultOverlayAlpha = 0.6;
             break;
     }
 }
+
+#pragma mark - keyboard handler
+
+- (void)setupKeyboardObserver {
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(moveUpPanel:) name:UIKeyboardWillShowNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(setKeyboardAppear) name:UIKeyboardDidShowNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(moveDownPanel:) name:UIKeyboardWillHideNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(setKeyboardDisappear) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)setKeyboardAppear {
+    self.isKeyboardShown = YES;
+}
+
+- (void)setKeyboardDisappear {
+    self.isKeyboardShown = YES;
+}
+
+- (void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
+
+- (void)removeKeyboardObserver {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)moveUpPanel:(NSNotification *)notification {
+    CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = [self appropriateKeyboardHeightFromRect:rect];
+    NSInteger curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    self.panelContentBottomContraint.constant = keyboardHeight;
+    [self runAnimationWithCurve:curve duration:duration];
+}
+
+- (CGFloat)appropriateKeyboardHeightFromRect:(CGRect)rect
+{
+    CGRect keyboardRect = [self.view convertRect:rect fromView:nil];
+    
+    CGFloat viewHeight = CGRectGetHeight(self.view.bounds);
+    CGFloat keyboardMinY = CGRectGetMinY(keyboardRect);
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        CGFloat bottomPadding = window.safeAreaInsets.bottom;
+        keyboardMinY += bottomPadding;
+    }
+    
+    
+    CGFloat keyboardDefaultHeight = MAX(0.0, viewHeight - keyboardMinY);
+    return keyboardDefaultHeight;
+}
+
+
+- (void)moveDownPanel:(NSNotification *)notification {
+    NSInteger curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    self.panelContentBottomContraint.constant = 0;
+    [self runAnimationWithCurve:curve duration:duration];
+}
+
+- (void)runAnimationWithCurve:(NSInteger)curve duration:(NSTimeInterval)duration {
+    [UIView animateWithDuration:duration
+         delay:0.0
+       options:(curve<<16)|UIViewAnimationOptionLayoutSubviews|UIViewAnimationOptionBeginFromCurrentState
+    animations:^{
+        [self.view layoutIfNeeded];
+    }
+    completion:nil];
+}
+
 
 @end
