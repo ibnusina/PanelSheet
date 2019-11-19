@@ -18,4 +18,6 @@
 
 - (void)setOverlayBackgroundColor:(UIColor *)color;
 
+- (void)hidePanelToBottomAndDismissWithCompletion:(void (^)(void))completion;
+
 @end
