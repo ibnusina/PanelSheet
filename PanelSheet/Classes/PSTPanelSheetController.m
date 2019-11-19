@@ -10,7 +10,7 @@
 
 const CGFloat defaultOverlayAlpha = 0.6;
 
-@interface PSTPanelSheetController ()
+@interface PSTPanelSheetController ()<UIViewControllerTransitioningDelegate>
 @property (weak, nonatomic) IBOutlet UIView *panelContainerView;
 @property (weak, nonatomic) IBOutlet UIView *panelNavigationView;
 @property (weak, nonatomic) IBOutlet UIView *panelContentView;
@@ -221,18 +221,19 @@ const CGFloat defaultOverlayAlpha = 0.6;
     if (self.isKeyboardShown) {
         [self dismissKeyboard];
     } else {
-        [self hidePanelToBottomAndDismiss];
+        [self hidePanelToBottomAndDismissWithCompletion:nil];
     }
 }
 
-- (void)hidePanelToBottomAndDismiss
+- (void)hidePanelToBottomAndDismissWithCompletion:(void (^)(void))completion
 {
     [self removeKeyboardObserver];
     __weak PSTPanelSheetController *weakSelf = self;
     [self animatePanelWithBottomConstraint:[self getPanelContainerMinimumBottomConstraint] alpha:0 completion:^(BOOL finished) {
-        [weakSelf dismissViewControllerAnimated:NO completion:nil];
+        [weakSelf dismissViewControllerAnimated:NO completion:completion];
     }];
 }
+
 
 
 - (void)animatePanelWithBottomConstraint:(CGFloat)bottomConstraint
@@ -281,7 +282,7 @@ const CGFloat defaultOverlayAlpha = 0.6;
             CGFloat movingDistance = [gestureRecognizer translationInView:self.panelContainerView].y;
             CGFloat halfContainerHeight = [self getPanelContainerHeight]/2;
             if (movingDistance > halfContainerHeight) {
-                [self hidePanelToBottomAndDismiss];
+                [self hidePanelToBottomAndDismissWithCompletion:nil];
             } else {
                 [self presentPanelFromBottom];
             }
