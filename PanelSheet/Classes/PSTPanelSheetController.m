@@ -54,6 +54,11 @@ const CGFloat defaultOverlayAlpha = 0.6;
     [self setupKeyboardObserver];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 #pragma mark - setup views
 
 - (void)setupPanelContent
@@ -70,7 +75,7 @@ const CGFloat defaultOverlayAlpha = 0.6;
 {
     UIView *navigationView;
     if (self.panelNavigationContentView) {
-        navigationView = self.panelContentView;
+        navigationView = self.panelNavigationContentView;
     } else {
         navigationView = [[PSTPanelNavigationView alloc] initWithTopCornerRadius:6
                                                                        holeWidth:50
@@ -97,15 +102,29 @@ const CGFloat defaultOverlayAlpha = 0.6;
     }
 }
 
-- (void)addSubview:(UIView *)subview to:(UIView *)superView
+- (void)addSubview:(UIView *)subview
+                to:(UIView *)superView
+{
+    [self addSubview:subview to:superView addBottomSafeAreaPadding:false];
+}
+
+- (void)addSubview:(UIView *)subview
+                to:(UIView *)superView
+addBottomSafeAreaPadding:(BOOL)addBottomPadding
 {
     [superView addSubview:subview];
     subview.translatesAutoresizingMaskIntoConstraints = NO;
+    CGFloat bottomPadding = 0;
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        bottomPadding = window.safeAreaInsets.bottom;
+    }
+
     NSArray *constraints = @[
                              [subview.topAnchor constraintEqualToAnchor:superView.topAnchor],
                              [subview.rightAnchor constraintEqualToAnchor:superView.rightAnchor],
                              [subview.leftAnchor constraintEqualToAnchor:superView.leftAnchor],
-                             [subview.bottomAnchor constraintEqualToAnchor:superView.bottomAnchor],
+                             [subview.bottomAnchor constraintEqualToAnchor:superView.bottomAnchor constant:bottomPadding],
                              ];
     [NSLayoutConstraint activateConstraints:constraints];
 }
@@ -151,13 +170,13 @@ const CGFloat defaultOverlayAlpha = 0.6;
         if ([viewOrViewController isKindOfClass:[UIView class]]) {
             UIView *view = (UIView *)viewOrViewController;
             [self removeAllSubviews:self.panelContentView];
-            [self addSubview:view to:self.panelContentView];
+            [self addSubview:view to:self.panelContentView addBottomSafeAreaPadding:YES];
             self.panelContentView.backgroundColor = view.backgroundColor;
         } else if ([viewOrViewController isKindOfClass:[UIViewController class]]) {
             UIViewController *viewController = (UIViewController *)viewOrViewController;
             [self addChildViewController:viewController];
             [self removeAllSubviews:self.panelContentView];
-            [self addSubview:viewController.view to:self.panelContentView];
+            [self addSubview:viewController.view to:self.panelContentView addBottomSafeAreaPadding:YES];
             [viewController didMoveToParentViewController:self];
             self.panelContentView.backgroundColor = viewController.view.backgroundColor;
         }

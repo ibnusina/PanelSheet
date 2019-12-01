@@ -25,7 +25,7 @@
 - (void)setupTopButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame = CGRectMake(20, 20, 300, 40);
+    button.frame = CGRectMake(20, 60, 300, 40);
     [self.view addSubview:button];
     [button setTitle:@"Show panel With UIViewController content" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(showPanelWithUIViewControllerContent) forControlEvents:UIControlEventTouchUpInside];
@@ -34,7 +34,7 @@
 - (void)setupBottomButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.frame = CGRectMake(20, 80, 300, 40);
+    button.frame = CGRectMake(20, 120, 300, 40);
     [self.view addSubview:button];
     [button setTitle:@"Show panel With UIView content" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(showPanelWithIUIViewContent) forControlEvents:UIControlEventTouchUpInside];
@@ -48,6 +48,11 @@
 - (void)showPanelWithUIViewControllerContent
 {
     PSTPanelSheetController *panelController = [[PSTPanelSheetController alloc] init];
+    PSTPanelNavigationView *navigationView = [[PSTPanelNavigationView alloc] initWithTopCornerRadius:20
+        holeWidth:80
+       holeHeight:5
+                                                                                       holeTopMargin:10];
+    [panelController setNavigationView:navigationView];
     [panelController setPanelNavigationHeight:30];
     [panelController setPanelContentHeight:200];
     UIViewController *viewController = [[UIViewController alloc] init];
