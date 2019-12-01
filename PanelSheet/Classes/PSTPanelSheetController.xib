@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -58,21 +55,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fng-ng-6dk">
-                    <rect key="frame" x="0.0" y="44" width="375" height="548"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="592"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="5SA-l8-Fd2" firstAttribute="trailing" secondItem="Fng-ng-6dk" secondAttribute="trailing" id="5zq-Kb-llj"/>
+                <constraint firstAttribute="trailing" secondItem="Fng-ng-6dk" secondAttribute="trailing" id="5zq-Kb-llj"/>
                 <constraint firstItem="hRq-ZJ-vTJ" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="G5a-9Y-GqX"/>
                 <constraint firstItem="hRq-ZJ-vTJ" firstAttribute="top" secondItem="Fng-ng-6dk" secondAttribute="bottom" id="Njy-r9-QOH"/>
                 <constraint firstAttribute="bottom" secondItem="hRq-ZJ-vTJ" secondAttribute="bottom" id="YYV-94-xXM"/>
-                <constraint firstItem="Fng-ng-6dk" firstAttribute="top" secondItem="5SA-l8-Fd2" secondAttribute="top" id="dND-fY-9eW"/>
-                <constraint firstItem="Fng-ng-6dk" firstAttribute="leading" secondItem="5SA-l8-Fd2" secondAttribute="leading" id="iFa-fX-xtQ"/>
+                <constraint firstItem="Fng-ng-6dk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dND-fY-9eW"/>
+                <constraint firstItem="Fng-ng-6dk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iFa-fX-xtQ"/>
                 <constraint firstItem="hRq-ZJ-vTJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kHi-s5-IQh"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="5SA-l8-Fd2"/>
             <point key="canvasLocation" x="136.80000000000001" y="110.09852216748769"/>
         </view>
     </objects>
