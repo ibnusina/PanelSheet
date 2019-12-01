@@ -38,7 +38,6 @@
 {
     [super layoutSubviews];
     self.layer.mask = [self createRoundedCornerWithHollowRectangleMask];
-    self.backgroundColor = UIColor.whiteColor;
 }
 
 - (CAShapeLayer *)createRoundedCornerWithHollowRectangleMask
