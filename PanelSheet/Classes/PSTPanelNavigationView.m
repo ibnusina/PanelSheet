@@ -30,6 +30,7 @@
         self.innerHoleWidth = holeWidth;
         self.innerHoleHeight = holeHeight;
         self.innerHoleTopMargin = holeTopMargin;
+        self.backgroundColor = UIColor.whiteColor;
     }
     return self;
 }
